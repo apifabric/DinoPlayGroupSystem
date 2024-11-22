@@ -1,0 +1,107 @@
+// Copy this text, paste to https://dbdiagram.io/d
+// Or, https://databasediagram.com/app
+// Or, view in VSCode with extension: "DBML Live Preview"
+
+Table Dinosaur {
+    id INTEGER [primary key]
+    name VARCHAR 
+    species VARCHAR 
+    age INTEGER 
+    group_id INTEGER 
+    }
+
+Table PlayGroup {
+    id INTEGER [primary key]
+    name VARCHAR 
+    location VARCHAR 
+    group_date DATE 
+    }
+
+Table DinosaurActivity {
+    id INTEGER [primary key]
+    dinosaur_id INTEGER 
+    play_group_id INTEGER 
+    activity VARCHAR 
+    duration INTEGER 
+    }
+
+Table DinosaurAttendance {
+    id INTEGER [primary key]
+    play_group_session_id INTEGER 
+    dinosaur_id INTEGER 
+    }
+
+Table PlayGroupSession {
+    id INTEGER [primary key]
+    play_group_id INTEGER 
+    session_date DATE 
+    total_dinosaurs INTEGER 
+    }
+
+Table DinosaurMeasurement {
+    id INTEGER [primary key]
+    dinosaur_id INTEGER 
+    date_measured DATE 
+    weight_kg INTEGER 
+    height_cm INTEGER 
+    }
+
+Table DinosaurSkill {
+    id INTEGER [primary key]
+    dinosaur_id INTEGER 
+    skill_name VARCHAR 
+    proficiency_level INTEGER 
+    }
+
+Table DinosaurTrainerAssociation {
+    id INTEGER [primary key]
+    dinosaur_id INTEGER 
+    trainer_id INTEGER 
+    }
+
+Table Trainer {
+    id INTEGER [primary key]
+    name VARCHAR 
+    specialization VARCHAR 
+    experience_years INTEGER 
+    associated_play_group_id INTEGER 
+    }
+
+Table FeedLog {
+    id INTEGER [primary key]
+    dinosaur_id INTEGER 
+    feed_type VARCHAR 
+    feed_datetime DATETIME 
+    amount_kg INTEGER 
+    }
+
+Table PlayGroupFacility {
+    id INTEGER [primary key]
+    play_group_id INTEGER 
+    facility_name VARCHAR 
+    availability_status VARCHAR 
+    }
+
+Table PlayGroupHost {
+    id INTEGER [primary key]
+    name VARCHAR 
+    host_since DATE 
+    rating INTEGER 
+    }
+
+
+
+// Relationships
+    Ref: Dinosaur.(group_id) < PlayGroup.(id)
+    Ref: DinosaurActivity.(dinosaur_id) < Dinosaur.(id)
+    Ref: DinosaurActivity.(play_group_id) < PlayGroup.(id)
+    Ref: DinosaurAttendance.(dinosaur_id) < Dinosaur.(id)
+    Ref: DinosaurAttendance.(play_group_session_id) < PlayGroupSession.(id)
+    Ref: PlayGroupSession.(play_group_id) < PlayGroup.(id)
+    Ref: DinosaurMeasurement.(dinosaur_id) < Dinosaur.(id)
+    Ref: DinosaurSkill.(dinosaur_id) < Dinosaur.(id)
+    Ref: DinosaurTrainerAssociation.(dinosaur_id) < Dinosaur.(id)
+    Ref: DinosaurTrainerAssociation.(trainer_id) < Trainer.(id)
+    Ref: Trainer.(associated_play_group_id) < PlayGroup.(id)
+    Ref: FeedLog.(dinosaur_id) < Dinosaur.(id)
+    Ref: PlayGroupFacility.(play_group_id) < PlayGroup.(id)

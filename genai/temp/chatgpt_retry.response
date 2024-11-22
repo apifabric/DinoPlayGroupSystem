@@ -1,0 +1,86 @@
+{
+    "models": [
+        {
+            "classname": "Dinosaur",
+            "code": "class Dinosaur(Base):\n    __tablename__ = 'dinosaur'\n\n    id = Column(Integer, primary_key=True)\n    name = Column(String, nullable=False)\n    species = Column(String, nullable=False)\n    age = Column(Integer)\n    group_id = Column(Integer, ForeignKey('play_group.id'))  # FK to PlayGroup\n    \n    description: str = \"description: Representing a dinosaur with its basic details like name, species, and age.\"",
+            "description": "Representing a dinosaur with its basic details like name, species, and age.",
+            "name": "Dinosaur"
+        },
+        {
+            "classname": "PlayGroup",
+            "code": "class PlayGroup(Base):\n    __tablename__ = 'play_group'\n\n    id = Column(Integer, primary_key=True)\n    name = Column(String, nullable=False)\n    location = Column(String, nullable=False)\n    group_date = Column(Date, nullable=True)\n\n    description: str = \"description: A play group for dinosaurs, including details about the location and meeting date.\"",
+            "description": "A play group for dinosaurs, including details about the location and meeting date.",
+            "name": "PlayGroup"
+        },
+        {
+            "classname": "DinosaurActivity",
+            "code": "class DinosaurActivity(Base):\n    __tablename__ = 'dinosaur_activity'\n\n    id = Column(Integer, primary_key=True)\n    dinosaur_id = Column(Integer, ForeignKey('dinosaur.id'))  # FK to Dinosaur\n    play_group_id = Column(Integer, ForeignKey('play_group.id'))  # FK to PlayGroup\n    activity = Column(String, nullable=False)\n    duration = Column(Integer)\n\n    description: str = \"description: Records an activity participated by a dinosaur within a specific play group, including the duration of the activity.\"",
+            "description": "Records an activity participated by a dinosaur within a specific play group, including the duration of the activity.",
+            "name": "DinosaurActivity"
+        },
+        {
+            "classname": "FeedLog",
+            "code": "class FeedLog(Base):\n    __tablename__ = 'feed_log'\n\n    id = Column(Integer, primary_key=True)\n    dinosaur_id = Column(Integer, ForeignKey('dinosaur.id'))  # FK to Dinosaur\n    feed_type = Column(String, nullable=False)\n    feed_datetime = Column(DateTime)\n    amount_kg = Column(Integer)\n\n    description: str = \"description: Logs feeding information for a dinosaur including type of feed, time, and amount in kilograms.\"",
+            "description": "Logs feeding information for a dinosaur including type of feed, time, and amount in kilograms.",
+            "name": "FeedLog"
+        },
+        {
+            "classname": "DinosaurMeasurement",
+            "code": "class DinosaurMeasurement(Base):\n    __tablename__ = 'dinosaur_measurement'\n\n    id = Column(Integer, primary_key=True)\n    dinosaur_id = Column(Integer, ForeignKey('dinosaur.id'))  # FK to Dinosaur\n    date_measured = Column(Date)\n    weight_kg = Column(Integer, nullable=True)\n    height_cm = Column(Integer, nullable=True)\n\n    description: str = \"description: Stores measurements of a dinosaur including weight and height recorded on a specific date.\"",
+            "description": "Stores measurements of a dinosaur including weight and height recorded on a specific date.",
+            "name": "DinosaurMeasurement"
+        },
+        {
+            "classname": "PlayGroupSession",
+            "code": "class PlayGroupSession(Base):\n    __tablename__ = 'play_group_session'\n\n    id = Column(Integer, primary_key=True)\n    play_group_id = Column(Integer, ForeignKey('play_group.id'))  # FK to PlayGroup\n    session_date = Column(Date)\n    total_dinosaurs = Column(Integer)  # Intermediate sum that should be maintained manually for test data\n\n    description: str = \"description: Represents a session for a play group, maintaining a count of all participating dinosaurs.\"",
+            "description": "Represents a session for a play group, maintaining a count of all participating dinosaurs.",
+            "name": "PlayGroupSession"
+        },
+        {
+            "classname": "PlayGroupHost",
+            "code": "class PlayGroupHost(Base):\n    __tablename__ = 'play_group_host'\n\n    id = Column(Integer, primary_key=True)\n    name = Column(String, nullable=False)\n    host_since = Column(Date)\n    rating = Column(Integer)\n\n    description: str = \"description: Hosts for play groups, detailing the name, hosting start date, and a rating.\"",
+            "description": "Hosts for play groups, detailing the name, hosting start date, and a rating.",
+            "name": "PlayGroupHost"
+        },
+        {
+            "classname": "DinosaurAttendance",
+            "code": "class DinosaurAttendance(Base):\n    __tablename__ = 'dinosaur_attendance'\n\n    id = Column(Integer, primary_key=True)\n    play_group_session_id = Column(Integer, ForeignKey('play_group_session.id'))  # FK to PlayGroupSession\n    dinosaur_id = Column(Integer, ForeignKey('dinosaur.id'))  # FK to Dinosaur\n\n    description: str = \"description: Tracks the attendance of a specific dinosaur during a play group session.\"",
+            "description": "Tracks the attendance of a specific dinosaur during a play group session.",
+            "name": "DinosaurAttendance"
+        },
+        {
+            "classname": "DinosaurSkill",
+            "code": "class DinosaurSkill(Base):\n    __tablename__ = 'dinosaur_skill'\n\n    id = Column(Integer, primary_key=True)\n    dinosaur_id = Column(Integer, ForeignKey('dinosaur.id'))  # FK to Dinosaur\n    skill_name = Column(String, nullable=False)\n    proficiency_level = Column(Integer)\n\n    description: str = \"description: Skills possessed by dinosaurs with a level of proficiency.\"",
+            "description": "Skills possessed by dinosaurs with a level of proficiency.",
+            "name": "DinosaurSkill"
+        },
+        {
+            "classname": "PlayGroupFacility",
+            "code": "class PlayGroupFacility(Base):\n    __tablename__ = 'play_group_facility'\n\n    id = Column(Integer, primary_key=True)\n    play_group_id = Column(Integer, ForeignKey('play_group.id'))  # FK to PlayGroup\n    facility_name = Column(String, nullable=False)\n    availability_status = Column(String, nullable=False)\n\n    description: str = \"description: Facilities available to play groups, including the current availability status.\"",
+            "description": "Facilities available to play groups, including the current availability status.",
+            "name": "PlayGroupFacility"
+        },
+        {
+            "classname": "Trainer",
+            "code": "class Trainer(Base):\n    __tablename__ = 'trainer'\n\n    id = Column(Integer, primary_key=True)\n    name = Column(String, nullable=False)\n    specialization = Column(String)\n    experience_years = Column(Integer)\n    associated_play_group_id = Column(Integer, ForeignKey('play_group.id'))\n\n    description: str = \"description: Trainers responsible for training dinosaurs, detailing name, specialization, and years of experience.\"",
+            "description": "Trainers responsible for training dinosaurs, detailing name, specialization, and years of experience.",
+            "name": "Trainer"
+        },
+        {
+            "classname": "DinosaurTrainerAssociation",
+            "code": "class DinosaurTrainerAssociation(Base):\n    __tablename__ = 'dinosaur_trainer_association'\n\n    id = Column(Integer, primary_key=True)\n    dinosaur_id = Column(Integer, ForeignKey('dinosaur.id'))  # FK to Dinosaur\n    trainer_id = Column(Integer, ForeignKey('trainer.id'))  # FK to Trainer\n\n    description: str = \"description: Links dinosaurs to their trainers, facilitating training tracking.\"",
+            "description": "Links dinosaurs to their trainers, facilitating training tracking.",
+            "name": "DinosaurTrainerAssociation"
+        }
+    ],
+    "rules": [
+        {
+            "name": "Rule 1",
+            "description": "Count total dinosaurs in a play group session",
+            "use_case": "Maintain the total count of dinosaurs participating in a session.",
+            "code": "Rule.count(derive=PlayGroupSession.total_dinosaurs, as_count_of=DinosaurAttendance)"
+        }
+    ],
+    "test_data": "from datetime import date, datetime\n\n# PlayGroup test data\nplay_group_1 = PlayGroup(id=1, name='Jurassic Kids', location='Central Park', group_date=date(2023, 10, 15))\nplay_group_2 = PlayGroup(id=2, name='Dino Explorers', location='West Field', group_date=date(2023, 10, 16))\nplay_group_3 = PlayGroup(id=3, name='Dino Fun Squad', location='East Meadow', group_date=date(2023, 10, 17))\nplay_group_4 = PlayGroup(id=4, name='Cretaceous Adventurers', location='North Plain', group_date=date(2023, 10, 18))\n\n# Dinosaur test data\n\ndinosaur_1 = Dinosaur(id=1, name='Tyra', species='Tyrannosaurus', age=5, group_id=1)\ndinosaur_2 = Dinosaur(id=2, name='Trike', species='Triceratops', age=3, group_id=1)\ndinosaur_3 = Dinosaur(id=3, name='Brachy', species='Brachiosaurus', age=10, group_id=2)\ndinosaur_4 = Dinosaur(id=4, name='Stego', species='Stegosaurus', age=7, group_id=3)\n\n# DinosaurActivity test data\nactivity_1 = DinosaurActivity(id=1, dinosaur_id=1, play_group_id=1, activity='Running', duration=30)\nactivity_2 = DinosaurActivity(id=2, dinosaur_id=2, play_group_id=1, activity='Eating', duration=20)\nactivity_3 = DinosaurActivity(id=3, dinosaur_id=3, play_group_id=2, activity='Sleeping', duration=50)\nactivity_4 = DinosaurActivity(id=4, dinosaur_id=4, play_group_id=3, activity='Walking', duration=40)\n\n# FeedLog test data\nfeed_log_1 = FeedLog(id=1, dinosaur_id=1, feed_type='Herbivore mix', feed_datetime=datetime(2023, 10, 10, 10, 0), amount_kg=7)\nfeed_log_2 = FeedLog(id=2, dinosaur_id=2, feed_type='Carnivore blend', feed_datetime=datetime(2023, 10, 11, 11, 0), amount_kg=8)\nfeed_log_3 = FeedLog(id=3, dinosaur_id=3, feed_type='Omnivore special', feed_datetime=datetime(2023, 10, 12, 12, 0), amount_kg=12)\nfeed_log_4 = FeedLog(id=4, dinosaur_id=4, feed_type='Fruity bites', feed_datetime=datetime(2023, 10, 13, 9, 0), amount_kg=5)\n\n# DinosaurMeasurement test data\nmeasurement_1 = DinosaurMeasurement(id=1, dinosaur_id=1, date_measured=date(2023, 10, 5), weight_kg=5000, height_cm=1200)\nmeasurement_2 = DinosaurMeasurement(id=2, dinosaur_id=2, date_measured=date(2023, 10, 6), weight_kg=4200, height_cm=1000)\nmeasurement_3 = DinosaurMeasurement(id=3, dinosaur_id=3, date_measured=date(2023, 10, 7), weight_kg=15000, height_cm=4000)\nmeasurement_4 = DinosaurMeasurement(id=4, dinosaur_id=4, date_measured=date(2023, 10, 8), weight_kg=7000, height_cm=1700)\n\n# PlayGroupSession test data\nsession_1 = PlayGroupSession(id=1, play_group_id=1, session_date=date(2023, 10, 15), total_dinosaurs=2)\nsession_2 = PlayGroupSession(id=2, play_group_id=2, session_date=date(2023, 10, 16), total_dinosaurs=1)\nsession_3 = PlayGroupSession(id=3, play_group_id=3, session_date=date(2023, 10, 17), total_dinosaurs=1)\nsession_4 = PlayGroupSession(id=4, play_group_id=4, session_date=date(2023, 10, 18), total_dinosaurs=0)\n\n# PlayGroupHost test data\nhost_1 = PlayGroupHost(id=1, name='John', host_since=date(2023, 1, 1), rating=5)\nhost_2 = PlayGroupHost(id=2, name='Alice', host_since=date(2023, 2, 1), rating=4)\nhost_3 = PlayGroupHost(id=3, name='Bob', host_since=date(2023, 3, 1), rating=3)\nhost_4 = PlayGroupHost(id=4, name='Kate', host_since=date(2023, 4, 1), rating=4)\n\n# DinosaurAttendance test data\nattendance_1 = DinosaurAttendance(id=1, play_group_session_id=1, dinosaur_id=1)\nattendance_2 = DinosaurAttendance(id=2, play_group_session_id=1, dinosaur_id=2)\nattendance_3 = DinosaurAttendance(id=3, play_group_session_id=2, dinosaur_id=3)\nattendance_4 = DinosaurAttendance(id=4, play_group_session_id=3, dinosaur_id=4)\n\n# DinosaurSkill test data\nskill_1 = DinosaurSkill(id=1, dinosaur_id=1, skill_name='Running fast', proficiency_level=3)\nskill_2 = DinosaurSkill(id=2, dinosaur_id=2, skill_name='Defensive posture', proficiency_level=4)\nskill_3 = DinosaurSkill(id=3, dinosaur_id=3, skill_name='High reach', proficiency_level=5)\nskill_4 = DinosaurSkill(id=4, dinosaur_id=4, skill_name='Camouflage', proficiency_level=2)\n\n# PlayGroupFacility test data\nfacility_1 = PlayGroupFacility(id=1, play_group_id=1, facility_name='Water Pool', availability_status='Available')\nfacility_2 = PlayGroupFacility(id=2, play_group_id=2, facility_name='Sand Pit', availability_status='Under Maintenance')\nfacility_3 = PlayGroupFacility(id=3, play_group_id=3, facility_name='Obstacle Course', availability_status='Available')\nfacility_4 = PlayGroupFacility(id=4, play_group_id=4, facility_name='Forest Trek', availability_status='Closed')\n\n# Trainer test data\ntrainer_1 = Trainer(id=1, name='Max', specialization='Fast Movement', experience_years=10, associated_play_group_id=1)\ntrainer_2 = Trainer(id=2, name='Lucy', specialization='Strength', experience_years=5, associated_play_group_id=2)\ntrainer_3 = Trainer(id=3, name='Sam', specialization='Dexterity', experience_years=8, associated_play_group_id=3)\ntrainer_4 = Trainer(id=4, name='Nina', specialization='Endurance', experience_years=6, associated_play_group_id=4)\n\n# DinosaurTrainerAssociation test data\nassociation_1 = DinosaurTrainerAssociation(id=1, dinosaur_id=1, trainer_id=1)\nassociation_2 = DinosaurTrainerAssociation(id=2, dinosaur_id=2, trainer_id=2)\nassociation_3 = DinosaurTrainerAssociation(id=3, dinosaur_id=3, trainer_id=3)\nassociation_4 = DinosaurTrainerAssociation(id=4, dinosaur_id=4, trainer_id=4)\n",
+    "name": "DinoPlayGroupSystem"
+}

@@ -1,0 +1,334 @@
+about:
+  date: November 22, 2024 21:39:32
+  recent_changes: works with modified safrs-react-admin
+  version: 0.0.0
+api_root: '{http_type}://{swagger_host}:{port}/{api}'
+authentication: '{system-default}'
+info:
+  number_relationships: 13
+  number_tables: 12
+info_toggle_checked: true
+resources:
+  Dinosaur:
+    attributes:
+    - label: ' name*'
+      name: name
+      required: true
+      search: true
+      sort: true
+    - name: group_id
+    - name: species
+      required: true
+    - name: age
+    - name: id
+    tab_groups:
+    - direction: tomany
+      fks:
+      - dinosaur_id
+      name: DinosaurActivityList
+      resource: DinosaurActivity
+    - direction: tomany
+      fks:
+      - dinosaur_id
+      name: DinosaurAttendanceList
+      resource: DinosaurAttendance
+    - direction: tomany
+      fks:
+      - dinosaur_id
+      name: DinosaurMeasurementList
+      resource: DinosaurMeasurement
+    - direction: tomany
+      fks:
+      - dinosaur_id
+      name: DinosaurSkillList
+      resource: DinosaurSkill
+    - direction: tomany
+      fks:
+      - dinosaur_id
+      name: DinosaurTrainerAssociationList
+      resource: DinosaurTrainerAssociation
+    - direction: tomany
+      fks:
+      - dinosaur_id
+      name: FeedLogList
+      resource: FeedLog
+    - direction: toone
+      fks:
+      - group_id
+      name: group
+      resource: PlayGroup
+    type: Dinosaur
+    user_key: name
+  DinosaurActivity:
+    attributes:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+    - name: dinosaur_id
+    - name: play_group_id
+    - name: activity
+      required: true
+    - name: duration
+    tab_groups:
+    - direction: toone
+      fks:
+      - dinosaur_id
+      name: dinosaur
+      resource: Dinosaur
+    - direction: toone
+      fks:
+      - play_group_id
+      name: play_group
+      resource: PlayGroup
+    type: DinosaurActivity
+    user_key: id
+  DinosaurAttendance:
+    attributes:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+    - name: dinosaur_id
+    - name: play_group_session_id
+    tab_groups:
+    - direction: toone
+      fks:
+      - dinosaur_id
+      name: dinosaur
+      resource: Dinosaur
+    - direction: toone
+      fks:
+      - play_group_session_id
+      name: play_group_session
+      resource: PlayGroupSession
+    type: DinosaurAttendance
+    user_key: id
+  DinosaurMeasurement:
+    attributes:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+    - name: dinosaur_id
+    - name: weight_kg
+    - name: height_cm
+    - name: date_measured
+      type: DATE
+    tab_groups:
+    - direction: toone
+      fks:
+      - dinosaur_id
+      name: dinosaur
+      resource: Dinosaur
+    type: DinosaurMeasurement
+    user_key: id
+  DinosaurSkill:
+    attributes:
+    - label: ' skill_name*'
+      name: skill_name
+      required: true
+      search: true
+      sort: true
+    - name: dinosaur_id
+    - name: proficiency_level
+    - name: id
+    tab_groups:
+    - direction: toone
+      fks:
+      - dinosaur_id
+      name: dinosaur
+      resource: Dinosaur
+    type: DinosaurSkill
+    user_key: skill_name
+  DinosaurTrainerAssociation:
+    attributes:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+    - name: dinosaur_id
+    - name: trainer_id
+    tab_groups:
+    - direction: toone
+      fks:
+      - dinosaur_id
+      name: dinosaur
+      resource: Dinosaur
+    - direction: toone
+      fks:
+      - trainer_id
+      name: trainer
+      resource: Trainer
+    type: DinosaurTrainerAssociation
+    user_key: id
+  FeedLog:
+    attributes:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+    - name: dinosaur_id
+    - name: feed_type
+      required: true
+    - name: feed_datetime
+      type: DATETIME
+    - name: amount_kg
+    tab_groups:
+    - direction: toone
+      fks:
+      - dinosaur_id
+      name: dinosaur
+      resource: Dinosaur
+    type: FeedLog
+    user_key: id
+  PlayGroup:
+    attributes:
+    - label: ' name*'
+      name: name
+      required: true
+      search: true
+      sort: true
+    - name: location
+      required: true
+    - name: group_date
+      type: DATE
+    - name: id
+    tab_groups:
+    - direction: tomany
+      fks:
+      - group_id
+      name: DinosaurList
+      resource: Dinosaur
+    - direction: tomany
+      fks:
+      - play_group_id
+      name: DinosaurActivityList
+      resource: DinosaurActivity
+    - direction: tomany
+      fks:
+      - play_group_id
+      name: PlayGroupFacilityList
+      resource: PlayGroupFacility
+    - direction: tomany
+      fks:
+      - play_group_id
+      name: PlayGroupSessionList
+      resource: PlayGroupSession
+    - direction: tomany
+      fks:
+      - associated_play_group_id
+      name: TrainerList
+      resource: Trainer
+    type: PlayGroup
+    user_key: name
+  PlayGroupFacility:
+    attributes:
+    - label: ' facility_name*'
+      name: facility_name
+      required: true
+      search: true
+      sort: true
+    - name: play_group_id
+    - name: availability_status
+      required: true
+    - name: id
+    tab_groups:
+    - direction: toone
+      fks:
+      - play_group_id
+      name: play_group
+      resource: PlayGroup
+    type: PlayGroupFacility
+    user_key: facility_name
+  PlayGroupHost:
+    attributes:
+    - label: ' name*'
+      name: name
+      required: true
+      search: true
+      sort: true
+    - name: host_since
+      type: DATE
+    - name: rating
+    - name: id
+    type: PlayGroupHost
+    user_key: name
+  PlayGroupSession:
+    attributes:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+    - name: play_group_id
+    - name: session_date
+      type: DATE
+    - name: total_dinosaurs
+    tab_groups:
+    - direction: tomany
+      fks:
+      - play_group_session_id
+      name: DinosaurAttendanceList
+      resource: DinosaurAttendance
+    - direction: toone
+      fks:
+      - play_group_id
+      name: play_group
+      resource: PlayGroup
+    type: PlayGroupSession
+    user_key: id
+  Trainer:
+    attributes:
+    - label: ' name*'
+      name: name
+      required: true
+      search: true
+      sort: true
+    - name: associated_play_group_id
+    - name: specialization
+    - name: experience_years
+    - name: id
+    tab_groups:
+    - direction: tomany
+      fks:
+      - trainer_id
+      name: DinosaurTrainerAssociationList
+      resource: DinosaurTrainerAssociation
+    - direction: toone
+      fks:
+      - associated_play_group_id
+      name: associated_play_group
+      resource: PlayGroup
+    type: Trainer
+    user_key: name
+settings:
+  HomeJS: /admin-app/home.js
+  max_list_columns: 8
+  style_guide:
+    applicationLocales:
+    - en
+    - es
+    currency_symbol: $
+    currency_symbol_position: left
+    date_format: LL
+    decimal_max: '1000000000'
+    decimal_min: '0'
+    decimal_separator: .
+    detail_mode: tab
+    edit_on_mode: dblclick
+    exclude_listpicker: false
+    include_translation: 'false'
+    keycloak_client_id: alsclient
+    keycloak_realm: kcals
+    keycloak_url: http://localhost:8080
+    locale: en
+    max_decimal_digits: '4'
+    min_decimal_digits: '2'
+    new_mode: dialog
+    pick_style: list
+    row_height: small,
+    serviceType: OntimizeEE
+    startSessionPath: /auth/login
+    style: light
+    thousand_separator: ','
+    use_keycloak: 'false'

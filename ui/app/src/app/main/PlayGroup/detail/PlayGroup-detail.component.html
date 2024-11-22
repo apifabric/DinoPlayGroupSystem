@@ -1,0 +1,287 @@
+<div class="container">
+<o-form-container breadcrumb="yes" breadcrumb-label-columns="name" breadcrumb-separator=", " class="fill-form">
+      <o-form #form attr="PlayGroup_form_edit" 
+        service="PlayGroup" 
+        entity="PlayGroup" 
+        fxLayout="column" 
+        show-header="yes" 
+        header-actions="R;I;U;D"
+        #oDetailForm keys="id" 
+        keys-sql-types="INTEGER" 
+        show-header-navigation="yes"
+        (onDataLoaded)="onDataLoaded($event)">
+
+  <o-row attr="row1" layout-align="start stretch">
+    <div fxLayout="row wrap" fxLayoutAlign="start start" fxFlex fxLayoutGap="14px">
+      
+      <o-text-input #name attr="name" label=" name*" enabled="yes" required="yes" fxFlex="20%" class="form-field"></o-text-input>
+      
+      <o-text-input #location attr="location" label="location" enabled="yes" required="yes" fxFlex="20%" class="form-field"></o-text-input>
+      
+      <o-date-input #group_date attr="group_date" type="date" label="group_date" enabled="yes" required="no" format="LL" fxFlex="20%" class="form-field"></o-date-input>
+      
+      <o-integer-input #id attr="id" label="id" type="integer" editable="no" required="no" ></o-integer-input>
+      
+    </div>
+  </o-row>
+      
+      <mat-tab-group fxFill>
+        
+        <mat-tab label="DINOSAUR-group_id">
+    <div layout-padding>
+      <o-table 
+        attr="DinosaurTable" 
+        service="Dinosaur" 
+        entity="Dinosaur" 
+        keys="id"
+        parent-keys="group_id:id"
+        columns="name;group_id;species;age;id"  
+        horizontal-scroll="yes"
+        detail-form-route="Dinosaur" 
+        edit-form-route="Dinosaur"
+        visible-columns="name;group_id;species;age;id"  
+        sort-columns="name" 
+        query-rows="25" 
+        quick-filter="yes"
+        row-height="medium" 
+        select-all-checkbox="true" 
+        pageable="yes"  
+        auto-adjust="true" 
+        virtual-scroll="yes" 
+        insert-button="yes" 
+        delete-button="yes" 
+        fixed-header="true" 
+        class="vertical-padding-8"
+        edition-mode="dblclick" 
+        horizontal-scroll="yes" class="fill-form">
+        
+          <o-table-column #name attr="name" title=" name*" editable="no" required="yes" content-align="left"></o-table-column>
+        
+          <o-table-column attr="group_id" title="group_id">
+    <o-table-cell-renderer-service attr="group_id" 
+        service="PlayGroup" entity="PlayGroupType" columns="id;name"
+        parent-keys="id:group_id"
+        value-column="name" keys="group_id"
+        visible-columns="name" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+        
+          <o-table-column #species attr="species" title="species" editable="no" required="yes" content-align="left"></o-table-column>
+        
+          <o-table-column #age attr="age" title="age" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+        
+          <o-table-column #id attr="id" title="id" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+        
+        <o-table-paginator page-size-options="25;50;100"></o-table-paginator>
+      </o-table>
+    </div>
+</mat-tab>
+        
+        <mat-tab label="DINOSAURACTIVITY-play_group_id">
+    <div layout-padding>
+      <o-table 
+        attr="DinosaurActivityTable" 
+        service="DinosaurActivity" 
+        entity="DinosaurActivity" 
+        keys="id"
+        parent-keys="play_group_id:id"
+        columns="id;dinosaur_id;play_group_id;activity;duration"  
+        horizontal-scroll="yes"
+        detail-form-route="DinosaurActivity" 
+        edit-form-route="DinosaurActivity"
+        visible-columns="id;dinosaur_id;play_group_id;activity;duration"  
+        sort-columns="id" 
+        query-rows="25" 
+        quick-filter="yes"
+        row-height="medium" 
+        select-all-checkbox="true" 
+        pageable="yes"  
+        auto-adjust="true" 
+        virtual-scroll="yes" 
+        insert-button="yes" 
+        delete-button="yes" 
+        fixed-header="true" 
+        class="vertical-padding-8"
+        edition-mode="dblclick" 
+        horizontal-scroll="yes" class="fill-form">
+        
+          <o-table-column #id attr="id" title=" id*" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+        
+          <o-table-column attr="dinosaur_id" title="dinosaur_id">
+    <o-table-cell-renderer-service attr="dinosaur_id" 
+        service="Dinosaur" entity="DinosaurType" columns="id;name"
+        parent-keys="id:dinosaur_id"
+        value-column="name" keys="dinosaur_id"
+        visible-columns="name" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+        
+          <o-table-column attr="play_group_id" title="play_group_id">
+    <o-table-cell-renderer-service attr="play_group_id" 
+        service="PlayGroup" entity="PlayGroupType" columns="id;name"
+        parent-keys="id:play_group_id"
+        value-column="name" keys="play_group_id"
+        visible-columns="name" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+        
+          <o-table-column #activity attr="activity" title="activity" editable="no" required="yes" content-align="left"></o-table-column>
+        
+          <o-table-column #duration attr="duration" title="duration" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+        
+        <o-table-paginator page-size-options="25;50;100"></o-table-paginator>
+      </o-table>
+    </div>
+</mat-tab>
+        
+        <mat-tab label="PLAYGROUPFACILITY-play_group_id">
+    <div layout-padding>
+      <o-table 
+        attr="PlayGroupFacilityTable" 
+        service="PlayGroupFacility" 
+        entity="PlayGroupFacility" 
+        keys="id"
+        parent-keys="play_group_id:id"
+        columns="facility_name;play_group_id;availability_status;id"  
+        horizontal-scroll="yes"
+        detail-form-route="PlayGroupFacility" 
+        edit-form-route="PlayGroupFacility"
+        visible-columns="facility_name;play_group_id;availability_status;id"  
+        sort-columns="facility_name" 
+        query-rows="25" 
+        quick-filter="yes"
+        row-height="medium" 
+        select-all-checkbox="true" 
+        pageable="yes"  
+        auto-adjust="true" 
+        virtual-scroll="yes" 
+        insert-button="yes" 
+        delete-button="yes" 
+        fixed-header="true" 
+        class="vertical-padding-8"
+        edition-mode="dblclick" 
+        horizontal-scroll="yes" class="fill-form">
+        
+          <o-table-column #facility_name attr="facility_name" title=" facility_name*" editable="no" required="yes" content-align="left"></o-table-column>
+        
+          <o-table-column attr="play_group_id" title="play_group_id">
+    <o-table-cell-renderer-service attr="play_group_id" 
+        service="PlayGroup" entity="PlayGroupType" columns="id;name"
+        parent-keys="id:play_group_id"
+        value-column="name" keys="play_group_id"
+        visible-columns="name" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+        
+          <o-table-column #availability_status attr="availability_status" title="availability_status" editable="no" required="yes" content-align="left"></o-table-column>
+        
+          <o-table-column #id attr="id" title="id" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+        
+        <o-table-paginator page-size-options="25;50;100"></o-table-paginator>
+      </o-table>
+    </div>
+</mat-tab>
+        
+        <mat-tab label="PLAYGROUPSESSION-play_group_id">
+    <div layout-padding>
+      <o-table 
+        attr="PlayGroupSessionTable" 
+        service="PlayGroupSession" 
+        entity="PlayGroupSession" 
+        keys="id"
+        parent-keys="play_group_id:id"
+        columns="id;play_group_id;session_date;total_dinosaurs"  
+        horizontal-scroll="yes"
+        detail-form-route="PlayGroupSession" 
+        edit-form-route="PlayGroupSession"
+        visible-columns="id;play_group_id;session_date;total_dinosaurs"  
+        sort-columns="id" 
+        query-rows="25" 
+        quick-filter="yes"
+        row-height="medium" 
+        select-all-checkbox="true" 
+        pageable="yes"  
+        auto-adjust="true" 
+        virtual-scroll="yes" 
+        insert-button="yes" 
+        delete-button="yes" 
+        fixed-header="true" 
+        class="vertical-padding-8"
+        edition-mode="dblclick" 
+        horizontal-scroll="yes" class="fill-form">
+        
+          <o-table-column #id attr="id" title=" id*" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+        
+          <o-table-column attr="play_group_id" title="play_group_id">
+    <o-table-cell-renderer-service attr="play_group_id" 
+        service="PlayGroup" entity="PlayGroupType" columns="id;name"
+        parent-keys="id:play_group_id"
+        value-column="name" keys="play_group_id"
+        visible-columns="name" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+        
+          <o-date-input #session_date attr="session_date" type="date" label="session_date" enabled="yes" required="no" format="LL" fxFlex="20%" class="form-field"></o-date-input>
+        
+          <o-table-column #total_dinosaurs attr="total_dinosaurs" title="total_dinosaurs" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+        
+        <o-table-paginator page-size-options="25;50;100"></o-table-paginator>
+      </o-table>
+    </div>
+</mat-tab>
+        
+        <mat-tab label="TRAINER-associated_play_group_id">
+    <div layout-padding>
+      <o-table 
+        attr="TrainerTable" 
+        service="Trainer" 
+        entity="Trainer" 
+        keys="id"
+        parent-keys="associated_play_group_id:id"
+        columns="name;associated_play_group_id;specialization;experience_years;id"  
+        horizontal-scroll="yes"
+        detail-form-route="Trainer" 
+        edit-form-route="Trainer"
+        visible-columns="name;associated_play_group_id;specialization;experience_years;id"  
+        sort-columns="name" 
+        query-rows="25" 
+        quick-filter="yes"
+        row-height="medium" 
+        select-all-checkbox="true" 
+        pageable="yes"  
+        auto-adjust="true" 
+        virtual-scroll="yes" 
+        insert-button="yes" 
+        delete-button="yes" 
+        fixed-header="true" 
+        class="vertical-padding-8"
+        edition-mode="dblclick" 
+        horizontal-scroll="yes" class="fill-form">
+        
+          <o-table-column #name attr="name" title=" name*" editable="no" required="yes" content-align="left"></o-table-column>
+        
+          <o-table-column attr="associated_play_group_id" title="associated_play_group_id">
+    <o-table-cell-renderer-service attr="associated_play_group_id" 
+        service="PlayGroup" entity="PlayGroupType" columns="id;name"
+        parent-keys="id:associated_play_group_id"
+        value-column="name" keys="associated_play_group_id"
+        visible-columns="name" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+        
+          <o-table-column #specialization attr="specialization" title="specialization" editable="no" required="no" content-align="left"></o-table-column>
+        
+          <o-table-column #experience_years attr="experience_years" title="experience_years" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+        
+          <o-table-column #id attr="id" title="id" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+        
+        <o-table-paginator page-size-options="25;50;100"></o-table-paginator>
+      </o-table>
+    </div>
+</mat-tab>
+        
+      </mat-tab-group>
+      
+    </o-form>
+  </o-form-container>
+</div>

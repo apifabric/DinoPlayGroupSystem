@@ -1,0 +1,528 @@
+about:
+  date: November 22, 2024 21:39:32
+  recent_changes: works with modified safrs-react-admin
+  version: 0.0.0
+api_root: '{http_type}://{swagger_host}:{port}/{api}'
+authentication: '{system-default}'
+entities:
+  Dinosaur:
+    columns:
+    - label: ' name*'
+      name: name
+      required: true
+      search: true
+      sort: true
+      template: text
+      type: VARCHAR
+    - name: group_id
+      template: integer
+      type: INTEGER
+    - name: species
+      required: true
+      template: text
+      type: VARCHAR
+    - name: age
+      template: integer
+      type: INTEGER
+    - name: id
+      template: integer
+      type: INTEGER
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: name
+    hidden: {}
+    home_template: home_template.html
+    label: Dinosaur
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: tomany
+      fks:
+      - dinosaur_id
+      name: DinosaurActivityList
+      resource: DinosaurActivity
+    - direction: tomany
+      fks:
+      - dinosaur_id
+      name: DinosaurAttendanceList
+      resource: DinosaurAttendance
+    - direction: tomany
+      fks:
+      - dinosaur_id
+      name: DinosaurMeasurementList
+      resource: DinosaurMeasurement
+    - direction: tomany
+      fks:
+      - dinosaur_id
+      name: DinosaurSkillList
+      resource: DinosaurSkill
+    - direction: tomany
+      fks:
+      - dinosaur_id
+      name: DinosaurTrainerAssociationList
+      resource: DinosaurTrainerAssociation
+    - direction: tomany
+      fks:
+      - dinosaur_id
+      name: FeedLogList
+      resource: FeedLog
+    - direction: toone
+      fks:
+      - group_id
+      name: group
+      resource: PlayGroup
+    type: Dinosaur
+  DinosaurActivity:
+    columns:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+      template: integer
+      type: INTEGER
+    - name: dinosaur_id
+      template: integer
+      type: INTEGER
+    - name: play_group_id
+      template: integer
+      type: INTEGER
+    - name: activity
+      required: true
+      template: text
+      type: VARCHAR
+    - name: duration
+      template: integer
+      type: INTEGER
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: id
+    hidden: {}
+    home_template: home_template.html
+    label: DinosaurActivity
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: toone
+      fks:
+      - dinosaur_id
+      name: dinosaur
+      resource: Dinosaur
+    - direction: toone
+      fks:
+      - play_group_id
+      name: play_group
+      resource: PlayGroup
+    type: DinosaurActivity
+  DinosaurAttendance:
+    columns:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+      template: integer
+      type: INTEGER
+    - name: dinosaur_id
+      template: integer
+      type: INTEGER
+    - name: play_group_session_id
+      template: integer
+      type: INTEGER
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: id
+    hidden: {}
+    home_template: home_template.html
+    label: DinosaurAttendance
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: toone
+      fks:
+      - dinosaur_id
+      name: dinosaur
+      resource: Dinosaur
+    - direction: toone
+      fks:
+      - play_group_session_id
+      name: play_group_session
+      resource: PlayGroupSession
+    type: DinosaurAttendance
+  DinosaurMeasurement:
+    columns:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+      template: integer
+      type: INTEGER
+    - name: dinosaur_id
+      template: integer
+      type: INTEGER
+    - name: weight_kg
+      template: integer
+      type: INTEGER
+    - name: height_cm
+      template: integer
+      type: INTEGER
+    - name: date_measured
+      type: DATE
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: id
+    hidden: {}
+    home_template: home_template.html
+    label: DinosaurMeasurement
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: toone
+      fks:
+      - dinosaur_id
+      name: dinosaur
+      resource: Dinosaur
+    type: DinosaurMeasurement
+  DinosaurSkill:
+    columns:
+    - label: ' skill_name*'
+      name: skill_name
+      required: true
+      search: true
+      sort: true
+      template: text
+      type: VARCHAR
+    - name: dinosaur_id
+      template: integer
+      type: INTEGER
+    - name: proficiency_level
+      template: integer
+      type: INTEGER
+    - name: id
+      template: integer
+      type: INTEGER
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: skill_name
+    hidden: {}
+    home_template: home_template.html
+    label: DinosaurSkill
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: toone
+      fks:
+      - dinosaur_id
+      name: dinosaur
+      resource: Dinosaur
+    type: DinosaurSkill
+  DinosaurTrainerAssociation:
+    columns:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+      template: integer
+      type: INTEGER
+    - name: dinosaur_id
+      template: integer
+      type: INTEGER
+    - name: trainer_id
+      template: integer
+      type: INTEGER
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: id
+    hidden: {}
+    home_template: home_template.html
+    label: DinosaurTrainerAssociation
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: toone
+      fks:
+      - dinosaur_id
+      name: dinosaur
+      resource: Dinosaur
+    - direction: toone
+      fks:
+      - trainer_id
+      name: trainer
+      resource: Trainer
+    type: DinosaurTrainerAssociation
+  FeedLog:
+    columns:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+      template: integer
+      type: INTEGER
+    - name: dinosaur_id
+      template: integer
+      type: INTEGER
+    - name: feed_type
+      required: true
+      template: text
+      type: VARCHAR
+    - name: feed_datetime
+      type: DATETIME
+    - name: amount_kg
+      template: integer
+      type: INTEGER
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: id
+    hidden: {}
+    home_template: home_template.html
+    label: FeedLog
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: toone
+      fks:
+      - dinosaur_id
+      name: dinosaur
+      resource: Dinosaur
+    type: FeedLog
+  PlayGroup:
+    columns:
+    - label: ' name*'
+      name: name
+      required: true
+      search: true
+      sort: true
+      template: text
+      type: VARCHAR
+    - name: location
+      required: true
+      template: text
+      type: VARCHAR
+    - name: group_date
+      type: DATE
+    - name: id
+      template: integer
+      type: INTEGER
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: name
+    hidden: {}
+    home_template: home_template.html
+    label: PlayGroup
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: tomany
+      fks:
+      - group_id
+      name: DinosaurList
+      resource: Dinosaur
+    - direction: tomany
+      fks:
+      - play_group_id
+      name: DinosaurActivityList
+      resource: DinosaurActivity
+    - direction: tomany
+      fks:
+      - play_group_id
+      name: PlayGroupFacilityList
+      resource: PlayGroupFacility
+    - direction: tomany
+      fks:
+      - play_group_id
+      name: PlayGroupSessionList
+      resource: PlayGroupSession
+    - direction: tomany
+      fks:
+      - associated_play_group_id
+      name: TrainerList
+      resource: Trainer
+    type: PlayGroup
+  PlayGroupFacility:
+    columns:
+    - label: ' facility_name*'
+      name: facility_name
+      required: true
+      search: true
+      sort: true
+      template: text
+      type: VARCHAR
+    - name: play_group_id
+      template: integer
+      type: INTEGER
+    - name: availability_status
+      required: true
+      template: text
+      type: VARCHAR
+    - name: id
+      template: integer
+      type: INTEGER
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: facility_name
+    hidden: {}
+    home_template: home_template.html
+    label: PlayGroupFacility
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: toone
+      fks:
+      - play_group_id
+      name: play_group
+      resource: PlayGroup
+    type: PlayGroupFacility
+  PlayGroupHost:
+    columns:
+    - label: ' name*'
+      name: name
+      required: true
+      search: true
+      sort: true
+      template: text
+      type: VARCHAR
+    - name: host_since
+      type: DATE
+    - name: rating
+      template: integer
+      type: INTEGER
+    - name: id
+      template: integer
+      type: INTEGER
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: name
+    hidden: {}
+    home_template: home_template.html
+    label: PlayGroupHost
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    type: PlayGroupHost
+  PlayGroupSession:
+    columns:
+    - label: ' id*'
+      name: id
+      search: true
+      sort: true
+      template: integer
+      type: INTEGER
+    - name: play_group_id
+      template: integer
+      type: INTEGER
+    - name: session_date
+      type: DATE
+    - name: total_dinosaurs
+      template: integer
+      type: INTEGER
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: id
+    hidden: {}
+    home_template: home_template.html
+    label: PlayGroupSession
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: tomany
+      fks:
+      - play_group_session_id
+      name: DinosaurAttendanceList
+      resource: DinosaurAttendance
+    - direction: toone
+      fks:
+      - play_group_id
+      name: play_group
+      resource: PlayGroup
+    type: PlayGroupSession
+  Trainer:
+    columns:
+    - label: ' name*'
+      name: name
+      required: true
+      search: true
+      sort: true
+      template: text
+      type: VARCHAR
+    - name: associated_play_group_id
+      template: integer
+      type: INTEGER
+    - name: specialization
+      template: text
+      type: VARCHAR
+    - name: experience_years
+      template: integer
+      type: INTEGER
+    - name: id
+      template: integer
+      type: INTEGER
+    detail_template: detail_template.html
+    exclude: 'false'
+    favorite: name
+    hidden: {}
+    home_template: home_template.html
+    label: Trainer
+    mode: tab
+    new_template: new_template.html
+    primary_key:
+    - id
+    tab_groups:
+    - direction: tomany
+      fks:
+      - trainer_id
+      name: DinosaurTrainerAssociationList
+      resource: DinosaurTrainerAssociation
+    - direction: toone
+      fks:
+      - associated_play_group_id
+      name: associated_play_group
+      resource: PlayGroup
+    type: Trainer
+settings:
+  HomeJS: /admin-app/home.js
+  max_list_columns: 8
+  style_guide:
+    applicationLocales:
+    - en
+    - es
+    currency_symbol: $
+    currency_symbol_position: left
+    date_format: LL
+    decimal_max: '1000000000'
+    decimal_min: '0'
+    decimal_separator: .
+    edit_on_mode: dblclick
+    exclude_listpicker: false
+    include_translation: false
+    keycloak_client_id: alsclient
+    keycloak_realm: kcals
+    keycloak_url: http://localhost:8080
+    locale: en
+    max_decimal_digits: '4'
+    min_decimal_digits: '2'
+    mode: tab
+    pick_style: list
+    serviceType: OntimizeEE
+    startSessionPath: /auth/login
+    style: light
+    thousand_separator: ','
+    use_keycloak: false

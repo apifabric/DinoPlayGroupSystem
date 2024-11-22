@@ -1,0 +1,90 @@
+{
+    "name": "Dinosaur Play Group",
+    "logo": {
+        "Type": "Logo",
+        "name": "Dino Group Logo",
+        "description": "A playful dinosaur illustration with the text 'Dinosaur Play Group'."
+    },
+    "sections": [
+        {
+            "title": "Welcome to Dinosaur Play Group!",
+            "subtitle": "Roar into adventure and learning",
+            "name": "Homepage Hero",
+            "label": "Home",
+            "content": "Experience the prehistoric adventure of learning and fun at Dinosaur Play Group. Our community-driven play space is designed to inspire the imaginations of young explorers and help them learn through engaging, hands-on activities.",
+            "order": 1,
+            "Type": "Hero",
+            "images": [
+                {
+                    "Type": "Hero",
+                    "name": "Dinosaur Park Image",
+                    "description": "A vibrant image showcasing children playing among lifelike dinosaur models."
+                }
+            ]
+        },
+        {
+            "title": "About Us",
+            "subtitle": "Our Story and Mission",
+            "name": "About Us Section",
+            "label": "About",
+            "content": "Established in 2020, Dinosaur Play Group was inspired by a love for dinosaurs and a passion for early childhood education. We aim to create a safe, fun, and educational environment where children can explore and grow. Our mission is to foster creativity, curiosity, and collaboration through play and exploration.",
+            "order": 2,
+            "Type": "About",
+            "images": [
+                {
+                    "Type": "Infographic",
+                    "name": "Mission Infographic",
+                    "description": "Infographic describing the mission and values of Dinosaur Play Group."
+                }
+            ]
+        },
+        {
+            "title": "Our Adventures",
+            "subtitle": "A World of Prehistoric Fun",
+            "name": "Services Section",
+            "label": "Services",
+            "content": "### Daily Dinosaur Expeditions  \nJoin us every day for themed adventures that blend learning with fun. Our activities include:\n\n* **Fossil Hunts**: Dig for fossils in our excavation sandbox.  \n* **Dino Arts & Crafts**: Create your own dinosaur-themed masterpiece.  \n* **Storytime in the Jurassic**: Enjoy thrilling tales of dinosaurs and adventure.  \n* **Dino Dance Party**: Groove and move like your favorite dino creatures.",
+            "order": 3,
+            "Type": "Services",
+            "images": [
+                {
+                    "Type": "Promotional",
+                    "name": "Activity Image",
+                    "description": "Children participating in dinosaur-related activities."
+                }
+            ]
+        },
+        {
+            "title": "Testimonials",
+            "subtitle": "Hear from Our Happy Explorers",
+            "name": "Testimonials Section",
+            "label": "Testimonials",
+            "content": "\"Dinosaur Play Group is an incredible experience for my children! They learn so much and always leave with a smile.\" \u2013 **Megan R.**  \n\n\"I love how every day holds a new adventure. The staff are caring, and the atmosphere is perfect for my little explorers.\" \u2013 **Jonathan K.**",
+            "order": 4,
+            "Type": "Testimonials",
+            "images": [
+                {
+                    "Type": "Testimonial",
+                    "name": "Family Photo",
+                    "description": "A happy family posing with dinosaur models at the play group."
+                }
+            ]
+        },
+        {
+            "title": "Get in Touch",
+            "subtitle": "Connect with Us Today",
+            "name": "Contact Section",
+            "label": "Contact",
+            "content": "We\u2019d love to hear from you! Whether you're curious about our program or want to schedule a visit, feel free to reach out.  \n\n**Address**: 123 Dino Drive, Fossilville  \n**Phone**: (555) 123-4567  \n**Email**: contact@dinosaurplaygroup.com",
+            "order": 5,
+            "Type": "Contact",
+            "images": [
+                {
+                    "Type": "Map",
+                    "name": "Location Map",
+                    "description": "Map showing the location of Dinosaur Play Group."
+                }
+            ]
+        }
+    ]
+}

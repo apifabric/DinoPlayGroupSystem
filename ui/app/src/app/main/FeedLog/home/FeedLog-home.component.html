@@ -1,0 +1,46 @@
+<o-form-layout-manager attr="FeedLog" mode="tab" title="FEEDLOG">
+    <div fxFill fxLayout="column" fxLayoutAlign="start">
+        <o-table 
+            attr="FeedLogTable" 
+            service="FeedLog" 
+            entity="FeedLog" 
+            title="FEEDLOG"
+            keys="id"
+            columns="id;dinosaur_id;feed_type;feed_datetime;amount_kg" 
+            header-actions="R;D"
+            visible-columns="id;dinosaur_id;feed_type;feed_datetime;amount_kg"  
+            sort-columns="id" 
+            query-rows="20" 
+            quick-filter="yes"
+            row-height="medium" 
+            select-all-checkbox="true" 
+            pageable="yes"  
+            auto-adjust="true" 
+            virtual-scroll="yes" 
+            edition-mode="dblclick"
+            horizontal-scroll="yes"
+            show-title="yes"
+            export-button="yes">
+            
+            <o-table-column #id attr="id" title=" id*" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+            
+            <o-table-column attr="dinosaur_id" title="dinosaur_id">
+    <o-table-cell-renderer-service attr="dinosaur_id" 
+        service="Dinosaur" entity="DinosaurType" columns="id;name"
+        parent-keys="id:dinosaur_id"
+        value-column="name" keys="dinosaur_id"
+        visible-columns="name" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+            
+            <o-table-column #feed_type attr="feed_type" title="feed_type" editable="no" required="yes" content-align="left"></o-table-column>
+            
+            <o-table-column #feed_datetime attr="feed_datetime" title="feed_datetime" editable="no" required="no" content-align="left"></o-table-column>
+            
+            <o-table-column #amount_kg attr="amount_kg" title="amount_kg" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+            
+            <o-table-context-menu></o-table-context-menu>
+            <o-table-paginator page-size-options="24;48;96"></o-table-paginator>
+        </o-table>
+    </div>
+</o-form-layout-manager>

@@ -1,0 +1,46 @@
+<o-form-layout-manager attr="DinosaurMeasurement" mode="tab" title="DINOSAURMEASUREMENT">
+    <div fxFill fxLayout="column" fxLayoutAlign="start">
+        <o-table 
+            attr="DinosaurMeasurementTable" 
+            service="DinosaurMeasurement" 
+            entity="DinosaurMeasurement" 
+            title="DINOSAURMEASUREMENT"
+            keys="id"
+            columns="id;dinosaur_id;weight_kg;height_cm;date_measured" 
+            header-actions="R;D"
+            visible-columns="id;dinosaur_id;weight_kg;height_cm;date_measured"  
+            sort-columns="id" 
+            query-rows="20" 
+            quick-filter="yes"
+            row-height="medium" 
+            select-all-checkbox="true" 
+            pageable="yes"  
+            auto-adjust="true" 
+            virtual-scroll="yes" 
+            edition-mode="dblclick"
+            horizontal-scroll="yes"
+            show-title="yes"
+            export-button="yes">
+            
+            <o-table-column #id attr="id" title=" id*" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+            
+            <o-table-column attr="dinosaur_id" title="dinosaur_id">
+    <o-table-cell-renderer-service attr="dinosaur_id" 
+        service="Dinosaur" entity="DinosaurType" columns="id;name"
+        parent-keys="id:dinosaur_id"
+        value-column="name" keys="dinosaur_id"
+        visible-columns="name" separator=" - " width="680px">
+    </o-table-cell-renderer-service>
+</o-table-column>
+            
+            <o-table-column #weight_kg attr="weight_kg" title="weight_kg" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+            
+            <o-table-column #height_cm attr="height_cm" title="height_cm" type="integer" editable="no" required="no" content-align="center"></o-table-column>
+            
+            <o-date-input #date_measured attr="date_measured" type="date" label="date_measured" enabled="yes" required="no" format="LL" fxFlex="20%" class="form-field"></o-date-input>
+            
+            <o-table-context-menu></o-table-context-menu>
+            <o-table-paginator page-size-options="24;48;96"></o-table-paginator>
+        </o-table>
+    </div>
+</o-form-layout-manager>
